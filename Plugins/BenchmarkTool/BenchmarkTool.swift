@@ -32,6 +32,10 @@ enum Grouping: String, ExpressibleByArgument {
     case test
 }
 
+enum ExportFormat: String, ExpressibleByArgument {
+    case influx
+}
+
 @main
 struct BenchmarkTool: AsyncParsableCommand {
     @Option(name: .long, help: "The path to the benchmark to run")
@@ -42,6 +46,9 @@ struct BenchmarkTool: AsyncParsableCommand {
 
     @Option(name: .long, help: "The command to perform")
     var command: String
+    
+    @Option(name: .long, help: "The export file format to use, 'csv'")
+    var exportFormat: ExportFormat
 
     @Option(name: .long, help: "The path to baseline directory for storage")
     var baselineStoragePath: String
@@ -122,6 +129,8 @@ struct BenchmarkTool: AsyncParsableCommand {
             fallthrough
         case "update-baseline":
             fallthrough
+        case "export":
+            fallthrough
         case "run":
             try runChild(benchmarkExecutablePath) { [self] result in
                 if result != 0 {
@@ -180,6 +189,8 @@ struct BenchmarkTool: AsyncParsableCommand {
 
                 switch command {
                 case "update-baseline":
+                    fallthrough
+                case "export":
                     fallthrough
                 case "run":
                     fallthrough
