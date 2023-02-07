@@ -46,9 +46,9 @@ struct BenchmarkTool: AsyncParsableCommand {
 
     @Option(name: .long, help: "The command to perform")
     var command: String
-    
-    @Option(name: .long, help: "The export file format to use, 'csv'")
-    var exportFormat: ExportFormat
+
+    @Option(name: .long, help: "The export file format to use, 'influx'")
+    var exportFormat: ExportFormat?
 
     @Option(name: .long, help: "The path to baseline directory for storage")
     var baselineStoragePath: String

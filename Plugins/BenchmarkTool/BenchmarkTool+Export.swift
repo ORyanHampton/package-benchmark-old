@@ -1,7 +1,7 @@
 import Benchmark
 import ExtrasJSON
 import SystemPackage
-import DateTime
+
 import Foundation
 
 #if canImport(Darwin)
@@ -192,6 +192,8 @@ class influxCSVFormatter {
         self.finalFileFormat = ""
     }
 
+    /// Takes in benchmark data and returns a csv formatted for influxDB
+    /// - Returns: CSV string representation
     func influxCSVFormat() -> String {
         let machine = exportableBenchmark.benchmarkMachine
         let hostName = machine.hostname
